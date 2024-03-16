@@ -9,7 +9,7 @@ Este é um projeto desenvolvido com o framework Nest.js. O projeto visa a implem
 Certifique-se de ter o seguinte instalado em sua máquina:
 
 - Node.js (v18.17.0 LTS)
-- Yarn (v1.22.19)
+- Yarn (v1.22.22)
 
 ## Instalação
 
