@@ -14,6 +14,12 @@ async function bootstrap() {
     new FastifyAdapter(),
   )
 
+  app.enableCors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: '*',
+  })
+
   const config = new DocumentBuilder()
     .setTitle('API Rick and Morty')
     .setDescription(
