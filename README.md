@@ -9,7 +9,7 @@ Este é um projeto desenvolvido com o framework Nest.js. O projeto visa a implem
 Caso haja dúvidas, é só acessar a documentação através do /docs:
 
 ```
-`http://localhost:3000/docs`
+http://localhost:3000/docs
 ```
 
 ## Pré-requisitos
