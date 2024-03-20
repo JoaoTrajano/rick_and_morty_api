@@ -5,9 +5,10 @@ import {
 } from '@nestjs/platform-fastify'
 import { AppModule } from './app.module'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import { Logger } from '@nestjs/common'
 
 async function bootstrap() {
-  const PORT = 3000
+  const PORT = process.env.PORT || 3000
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
@@ -31,6 +32,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
 
-  await app.listen(process.env.PORT || PORT)
+  Logger.log(`API run in http://localhost:${PORT}`)
+  console.log(PORT)
+  await app.listen(PORT)
 }
 bootstrap()
