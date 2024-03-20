@@ -21,7 +21,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('API Rick and Morty')
     .setDescription(
-      'This project implement the api https://rickandmortyapi.com/',
+      'This project implements the API from https://rickandmortyapi.com/',
     )
     .setVersion('1.0')
     .addTag('character')
@@ -30,6 +30,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
 
-  await app.listen(process.env.PORT || 8080)
+  await app.listen(process.env.PORT || 8080, '0.0.0.0')
 }
+
 bootstrap()
