@@ -8,7 +8,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { Logger } from '@nestjs/common'
 
 async function bootstrap() {
-  const PORT = process.env.PORT || 3000
+  const PORT = process.env.PORT
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
