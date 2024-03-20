@@ -59,10 +59,11 @@ export class CharacterService {
 
   async findOne(id: number): Promise<{
     character: CharacterEntity
-  }> {
+  } | null> {
     const result = await this.clientAxiosAdapter.get<ApiResponse>(
       `/character/${id}`,
     )
+    if (!result) return null
     return {
       character: CharacterMapper.toDomain(
         result.data as unknown as CharacterAPI,
@@ -72,10 +73,12 @@ export class CharacterService {
 
   async findMany(
     characterIds: string,
-  ): Promise<{ characters: CharacterEntity[]; metadata: InfosAPI }> {
+  ): Promise<{ characters: CharacterEntity[]; metadata: InfosAPI } | null> {
     const resultApi = await this.clientAxiosAdapter.get<ApiResponse>(
       `/character/${characterIds}`,
     )
+    if (!resultApi) return null
+
     const characters = (resultApi.data as unknown as CharacterAPI[]).map(
       CharacterMapper.toDomain,
     )

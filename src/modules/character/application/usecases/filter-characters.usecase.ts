@@ -1,5 +1,5 @@
 import { ApplicationUseCase } from '@/shared/usecases/interfaces/usecase.interface'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CharacterService, InfosAPI } from '../services/character.service'
 import { CharacterAPI } from '../services/character.service'
 import { ApplicationOutput } from '@/shared/entities/domain/application-output.entity'
@@ -27,8 +27,7 @@ export class GetFilterCharactersUseCase
 
   async execute(input: GetFilterCharactersUseCaseInput) {
     const result = await this.characterService.filterCharacters(input.fields)
-    if (!result) throw new Error()
-
+    if (!result) throw new NotFoundException('Personagem não encontrado!')
     return new ApplicationOutput(
       { characters: result.characters },
       { metadata: result.metadata },

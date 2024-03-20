@@ -21,14 +21,14 @@ export class AxiosAdapter implements HttpInterface {
   async get<ApiResponse = unknown, Params = any>(
     path: string,
     params?: Params,
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse | null> {
     try {
       const data = (await this.client
         .getClient<ClientInstance>()
         .get(path, { params })) as ApiResponse
       return data
     } catch (error) {
-      console.log(error)
+      return null
     }
   }
 }

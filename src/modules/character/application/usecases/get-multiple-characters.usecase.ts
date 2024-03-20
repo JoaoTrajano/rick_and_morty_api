@@ -1,5 +1,5 @@
 import { ApplicationUseCase } from '@/shared/usecases/interfaces/usecase.interface'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CharacterService, InfosAPI } from '../services/character.service'
 import { CharacterAPI } from '../services/character.service'
 import { ApplicationOutput } from '@/shared/entities/domain/application-output.entity'
@@ -28,6 +28,8 @@ export class GetMultipleCharactersUseCase
 
   async execute(input: GetMultipleCharactersUseCaseInput) {
     const result = await this.characterService.findMany(input.characterIds)
+    if (!result) throw new NotFoundException('Personagem não encontrado!')
+
     return new ApplicationOutput({
       characters: result.characters,
       metadata: result.metadata,

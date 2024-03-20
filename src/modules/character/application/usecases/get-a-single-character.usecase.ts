@@ -1,5 +1,5 @@
 import { ApplicationUseCase } from '@/shared/usecases/interfaces/usecase.interface'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CharacterService } from '../services/character.service'
 import { ApplicationOutput } from '@/shared/entities/domain/application-output.entity'
 import { CharacterEntity } from '../../domain/entities/character.entity'
@@ -22,6 +22,8 @@ export class GetASingleCharacterUseCase
 
   async execute(input: GetASingleCharacterUseCaseInput) {
     const result = await this.characterService.findOne(input.characterId)
+    if (!result) throw new NotFoundException('Personagem não encontrado!')
+
     return new ApplicationOutput({ ...result })
   }
 }
