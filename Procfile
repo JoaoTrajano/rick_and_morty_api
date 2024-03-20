@@ -1,1 +1,1 @@
-web: yarn run start:prod --port=$PORT
+worker: yarn run start:prod --port=$PORT
