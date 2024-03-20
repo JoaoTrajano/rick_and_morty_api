@@ -1,1 +1,1 @@
-web:yarn run start:prod
+web: node dist/src/main.js
