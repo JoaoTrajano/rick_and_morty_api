@@ -1,5 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger'
+
 export class ApplicationOutput<Output = unknown, Metadata = unknown> {
+  @ApiProperty()
   public value: Output
+
+  @ApiProperty()
   public metadata?: Metadata
 
   constructor(value?: Output, metadata?: Metadata) {

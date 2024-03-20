@@ -1,5 +1,5 @@
 import { Entity } from '@/shared/entities/domain/entity'
-
+import { ApiProperty } from '@nestjs/swagger'
 export type Origin = {
   name: string
   url: string
@@ -24,15 +24,34 @@ export type CharacterProps = {
 }
 
 export class CharacterEntity extends Entity {
+  @ApiProperty()
   public name: string
+
+  @ApiProperty()
   public status: 'alive' | 'dead' | 'unknown'
+
+  @ApiProperty()
   public species: string
+
+  @ApiProperty()
   public type: string
+
+  @ApiProperty()
   public gender: string
+
+  @ApiProperty()
   public origin: Origin
+
+  @ApiProperty()
   public location: Location
+
+  @ApiProperty()
   public image: string
+
+  @ApiProperty()
   public episode: string[]
+
+  @ApiProperty()
   public url: string
 
   constructor(

@@ -86,18 +86,23 @@ export class CharacterService {
 
   async filterCharacters(
     fields: any,
-  ): Promise<{ characters: CharacterEntity[]; metadata: InfosAPI }> {
-    const resultApi = await this.clientAxiosAdapter.get<ApiResponse>(
-      '/character',
-      {
-        ...fields,
-      },
-    )
-    const characters = (resultApi.data.results as CharacterAPI[]).map(
-      CharacterMapper.toDomain,
-    )
-    const metadata = resultApi.data.info
+  ): Promise<{ characters: CharacterEntity[]; metadata: InfosAPI } | null> {
+    try {
+      const resultApi = await this.clientAxiosAdapter.get<ApiResponse>(
+        '/character',
+        {
+          ...fields,
+        },
+      )
+      if (!resultApi) return null
 
-    return { characters, metadata }
+      const characters = (resultApi.data.results as CharacterAPI[]).map(
+        CharacterMapper.toDomain,
+      )
+
+      return { characters, metadata: resultApi.data.info }
+    } catch (error) {
+      return null
+    }
   }
 }

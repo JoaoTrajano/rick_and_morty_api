@@ -8,7 +8,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { Logger } from '@nestjs/common'
 
 async function bootstrap() {
-  const PORT = 3001
+  const PORT = 3002
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
@@ -26,7 +26,7 @@ async function bootstrap() {
       'This project implement the api https://rickandmortyapi.com/',
     )
     .setVersion('1.0')
-    .addTag('API Rick and Morty')
+    .addTag('character')
     .build()
 
   const document = SwaggerModule.createDocument(app, config)

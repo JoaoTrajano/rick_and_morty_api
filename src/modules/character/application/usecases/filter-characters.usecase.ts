@@ -13,25 +13,25 @@ export interface GetFilterCharactersUseCaseInput {
   fields: any
 }
 
+ApplicationOutput<{
+  characters: CharacterEntity[]
+  metadata: InfosAPI
+}>
+
 @Injectable()
 export class GetFilterCharactersUseCase
   implements
-    ApplicationUseCase<
-      GetFilterCharactersUseCaseInput,
-      ApplicationOutput<{
-        characters: CharacterEntity[]
-        metadata: InfosAPI
-      }>
-    >
+    ApplicationUseCase<GetFilterCharactersUseCaseInput, ApplicationOutput>
 {
   constructor(private readonly characterService: CharacterService) {}
 
   async execute(input: GetFilterCharactersUseCaseInput) {
     const result = await this.characterService.filterCharacters(input.fields)
+    if (!result) throw new Error()
 
-    return new ApplicationOutput({
-      characters: result.characters,
-      metadata: result.metadata,
-    })
+    return new ApplicationOutput(
+      { characters: result.characters },
+      { metadata: result.metadata },
+    )
   }
 }

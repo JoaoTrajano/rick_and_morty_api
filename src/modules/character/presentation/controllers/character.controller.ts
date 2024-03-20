@@ -6,7 +6,10 @@ import {
   GetFilterCharactersUseCase,
 } from '../../application/usecases'
 import { CharacterPresenter } from '../presenters/character.presenter'
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
+import { ApplicationOutput } from '@/shared/entities/domain/application-output.entity'
 
+@ApiTags('character')
 @Controller('character')
 export class CharacterController {
   constructor(
@@ -17,6 +20,10 @@ export class CharacterController {
   ) {}
 
   @Get()
+  @ApiCreatedResponse({
+    description: 'Retorna todos os personagens',
+    type: ApplicationOutput,
+  })
   async findAll() {
     const result = await this.getAllCharacterUseCase.execute()
     const resultMappeded = CharacterPresenter.mapCharactersFromOutput(result)
@@ -48,6 +55,7 @@ export class CharacterController {
     })
 
     const resultMappeded = CharacterPresenter.mapCharactersFromOutput(result)
+
     return resultMappeded.toHttpResponse()
   }
 }
